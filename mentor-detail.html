@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Website - Mentor Detail</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="mentors.html">Mentors</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="mentor-detail">
+        <img id="mentor-image" src="" alt="Mentor Name">
+        <h2 id="mentor-name"></h2>
+        <p><strong>Expertise:</strong> <span id="mentor-expertise"></span></p>
+        <p id="mentor-bio"></p>
+        <p><strong>Contact:</strong> <span id="mentor-contact"></span></p>
+
+        <h3>Schedule a Meeting</h3>
+        <form id="meetingForm">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required>
+            <button type="submit">Request Meeting</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Mentor Website. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Define the mentors' details
+        const mentors = {
+            johndoe: {
+                name: "John Doe",
+                expertise: "Web Development",
+                bio: "John is an expert in Web Development with over 15 years of experience.",
+                contact: "johndoe@example.com",
+                image: "images/mentor1.jpg"
+            },
+            janesmith: {
+                name: "Jane Smith",
+                expertise: "Data Science",
+                bio: "Jane has over 10 years of experience in Data Science and has worked with major tech companies to develop data-driven solutions.",
+                contact: "janesmith@example.com",
+                image: "images/mentor2.jpg"
+            }
+        };
+
+        // Get the mentor from the query string
+        const urlParams = new URLSearchParams(window.location.search);
+        const mentorKey = urlParams.get('mentor');
+
+        // If mentor exists, update the page content
+        if (mentorKey && mentors[mentorKey]) {
+            const mentor = mentors[mentorKey];
+            document.getElementById('mentor-name').textContent = mentor.name;
+            document.getElementById('mentor-expertise').textContent = mentor.expertise;
+            document.getElementById('mentor-bio').textContent = mentor.bio;
+            document.getElementById('mentor-contact').textContent = mentor.contact;
+            document.getElementById('mentor-image').src = mentor.image;
+        } else {
+            document.querySelector('.mentor-detail').innerHTML = "<p>Mentor not found.</p>";
+        }
+
+        // Handle form submission and redirect to mentors.html
+        document.getElementById('meetingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Assuming form processing is successful
+            alert('Meeting request submitted successfully!');
+            window.location.href = 'mentors.html';
+        });
+    </script>
+</body>
+</html>
